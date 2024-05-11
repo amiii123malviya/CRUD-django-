@@ -1,0 +1,10 @@
+<h1>Insert Form</h1>
+<form action="{% url 'insert' %}" method="post">
+    {% csrf_token %}
+    {{form}}
+
+    <input type="submit" value="insert">
+</form>
+<h1>Show data</h1>
+<input type="submit" value="showdata">
+

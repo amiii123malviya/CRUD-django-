@@ -1,0 +1,40 @@
+<html lang="en">
+    <body>
+        <h1>Insert Form</h1>
+        <form action="{% url 'insert' %}" method="post">
+            {% csrf_token %}
+            {{form}}
+        
+            <input type="submit" value="insert">
+        </form>
+        <h1>Show data</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                     
+
+                </tr>
+            </thead>
+            <!-- {% if ddata%} -->
+            <tbody>
+                {% for i in ddata %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.Firstname}}</td>
+                    <td>{{i.Lastname}}</td>
+                    <td>{{i.Email}}</td>
+                    <td>{{i.City}}</td>
+                    <td>{{i.Contact}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+
+
+
+        </table>
+    
+    
+    </body>
+
+</html>
