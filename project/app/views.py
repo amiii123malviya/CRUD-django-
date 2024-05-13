@@ -18,8 +18,8 @@ def insert(request):
     print(data)
 
     if data:
-        # msg='email already exist'
-        return render(request,'home.html')
+        msg='email already exist'
+        return render(request,'home.html',{'key':msg})
     else:
         Student.objects.create(Firstname=fname,
                                Lastname=lname,
@@ -32,8 +32,35 @@ def insert(request):
 
 def showdata(request):
     ddata=Student.objects.all()
-    return render(request,'showdata.html',{'ddata':ddata})
+    data={
+        'ddata':ddata
+    }
+    return render(request,'showdata.html',data)
 
+def edit(request,pk):
+    eddit=Student.objects.get(id=pk)
+    return render(request,'update.html',{'eddit':eddit})
+
+def update(request,pk):
+    student=Student.objects.get(id=pk)
+    if request.method=='POST':
+        student.Firstname=request.POST.get('Firstname')
+        student.Lastname=request.POST.get('Lastname')
+        student.Email=request.POST.get('Email')
+        student.City=request.POST.get('City')
+        student.Contact=request.POST.get('Contact')
+        student.save()
+        msg="data updated"
+        return redirect('showdata')
+    return render(request,'update.html',{'student':student})
+
+def delete(request,pk):
+    sdel=Student.objects.get(id=pk)
+    sdel.delete()
+    msg="data deleted"
+    return redirect('showdata')
+
+    
     
         
 
